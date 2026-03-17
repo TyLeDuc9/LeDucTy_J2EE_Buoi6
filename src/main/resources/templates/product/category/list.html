@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{product/_layout}">
+<head><title>Quản lý danh mục</title></head>
+<body>
+<div layout:fragment="content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">Danh sách danh mục</h3>
+        <a th:href="@{/categories/add}" class="btn btn-primary">Thêm danh mục mới</a>
+    </div>
+
+    <table class="table table-hover align-middle">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Tên danh mục</th>
+            <th class="text-center">Thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cat : ${categories}">
+            <td th:text="${cat.id}"></td>
+            <td class="fw-bold" th:text="${cat.name}"></td>
+            <td class="text-center">
+                <a th:href="@{/categories/edit/{id}(id=${cat.id})}" class="btn btn-warning btn-sm">Sửa</a>
+                <a th:href="@{/categories/delete/{id}(id=${cat.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('Xóa danh mục này có thể ảnh hưởng đến sản phẩm liên quan. Bạn chắc chứ?')">Xóa</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
